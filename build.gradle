@@ -2,17 +2,27 @@ plugins {
 	id 'org.springframework.boot' version '2.2.2.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'org.sonarqube' version '2.7'
 }
 
 group = 'com.example'
 version = '0.0.1'
 sourceCompatibility = '1.8'
 
+sonarqube {
+	properties {
+		property "sonar.sourceEncoding", "UTF-8"
+		property "sonar.projectName", "Final project"
+		property "sonar.projectKey", "finalproject-mouna"
+	}
+}
+
 configurations {
 	developmentOnly
 	runtimeClasspath {
 		extendsFrom developmentOnly
 	}
+}
 
 repositories {
 	mavenCentral()

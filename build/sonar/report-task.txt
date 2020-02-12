@@ -1,0 +1,6 @@
+projectKey=finalproject-mouna
+serverUrl=http://localhost:9000
+serverVersion=8.1.0.31237
+dashboardUrl=http://localhost:9000/dashboard?id=finalproject-mouna
+ceTaskId=AXA6YDj1M8_BdVsLLKrC
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXA6YDj1M8_BdVsLLKrC
