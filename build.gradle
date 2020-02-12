@@ -13,7 +13,6 @@ configurations {
 	runtimeClasspath {
 		extendsFrom developmentOnly
 	}
-}
 
 repositories {
 	mavenCentral()
