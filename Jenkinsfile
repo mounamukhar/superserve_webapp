@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building Gradle Project..'
-		sh './gradlew clean build -x test'
+                echo 'Compile Gradle Project..'
+		sh './gradlew task compileJava'
             }
         }
         stage('Test') {
@@ -17,6 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+		sh './gradlew bootRun'
             }
         }
 	stage('Clean up') {
