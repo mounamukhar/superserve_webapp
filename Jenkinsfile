@@ -5,13 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building Gradle Project..'
-		sh './gradlew build'
+		sh './gradlew clean build -x test'
             }
         }
         stage('Test') {
             steps {
                 echo 'Unit Testing with Gradle..'
-		sh './gradlew task compileTestJava'
+		sh './gradlew task test'
             }
         }
         stage('Deploy') {
@@ -19,6 +19,12 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+	stage('Clean up') {
+	    steps {
+		echo 'Clean up being done....'
+		sh 'cleanWs()'	
+	    }
+	}
     }
 }
 
