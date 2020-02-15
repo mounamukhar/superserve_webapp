@@ -4,12 +4,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building Gradle Project..'
+		sh './gradlew build'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Unit Testing with Gradle..'
+		sh './gradlew task compileTestJava'
             }
         }
         stage('Deploy') {
