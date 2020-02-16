@@ -17,8 +17,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying using dockerfile....'
-		docker build -t edureka-devop-finalproject .
- 		docker run -p 5000:8888 edureka-devop-finalproject
+		sh 'docker build -t edureka-devop-finalproject .'
+ 		sh 'docker run -p 5000:8888 edureka-devop-finalproject'
             }
         }
 	stage('Clean up') {
