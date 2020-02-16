@@ -1,5 +1,4 @@
-pipeline {
-    agent any
+
 
     stages {
         stage('Build') {
@@ -17,8 +16,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying using dockerfile....'
-		sh 'docker build -t edureka-devop-finalproject .'
- 		sh 'docker run -p 5000:8888 edureka-devop-finalproject'
+		sh 'sudo docker build -t edureka-devop-finalproject .'
+ 		sh 'sudo docker run -p 5000:8888 edureka-devop-finalproject'
             }
         }
 	stage('Clean up') {
