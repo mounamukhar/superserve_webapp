@@ -1,4 +1,5 @@
-
+peline {
+    agent any
 
     stages {
         stage('Build') {
@@ -15,9 +16,9 @@
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying using dockerfile....'
+                echo 'Deploying....'
 		sh 'sudo docker build -t edureka-devop-finalproject .'
- 		sh 'sudo docker run -p 5000:8888 edureka-devop-finalproject'
+		sh 'sudo docker run -p 5000:8888 edureka-devop-finalproject'
             }
         }
 	stage('Clean up') {
@@ -27,4 +28,6 @@
 	    }
 	}
     }
+}
+    
 
