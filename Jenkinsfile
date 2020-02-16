@@ -16,8 +16,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
-		sh './gradlew bootRun'
+                echo 'Deploying using dockerfile....'
+		docker build -t edureka-devop-finalproject .
+ 		docker run -p 5000:8888 edureka-devop-finalproject
             }
         }
 	stage('Clean up') {
