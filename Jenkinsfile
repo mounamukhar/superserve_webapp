@@ -24,7 +24,6 @@ pipeline {
                 echo 'Deploying....'
 		sh 'docker build -t registry:$BUILD_NUMBER .'
 		sh 'docker run -d -p 5000:8888 registry:$BUILD_NUMBER'
-                dockerImage=registry:$BUILD_NUMBER
 	    }
         }
 	stage('Test Deployment') {	   
@@ -45,7 +44,9 @@ pipeline {
 	stage('Deploy Image') {
       steps{
         script {
+		
           docker.withRegistry( '', registryCredential ) {
+		  dockerImage = registry:$BUILD_NUMBER
             dockerImage.push()
           }
         }
