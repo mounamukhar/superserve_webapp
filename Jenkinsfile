@@ -22,8 +22,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-		sh 'docker build -t registry:$BUILD_NUMBER .'
-		sh 'docker run -d -p 5000:8888 registry:$BUILD_NUMBER'
+		sh 'docker rmi $registry:$BUILD_NUMBER'
+		sh 'docker build -t $registry:$BUILD_NUMBER .'
+		sh 'docker run -d -p 5000:8888 $registry:$BUILD_NUMBER'
 	    }
         }
 	stage('Test Deployment') {	   
