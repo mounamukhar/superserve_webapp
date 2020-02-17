@@ -46,7 +46,7 @@ pipeline {
         script {
 		
           docker.withRegistry( '', registryCredential ) {
-		  dockerImage = registry:$BUILD_NUMBER
+		  dockerImage = registry + ":$BUILD_NUMBER"
             dockerImage.push()
           }
         }
