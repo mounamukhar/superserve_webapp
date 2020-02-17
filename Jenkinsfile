@@ -5,8 +5,8 @@ pipeline {
 	stage('Clean up') {
             steps {
                 echo 'Clean up being done....'
-                docker stop $(docker ps -a -q)
-                docker rm $(docker ps -a -q)
+                sh 'docker stop $(docker ps -a -q)'
+                sh 'docker rm $(docker ps -a -q)'
                 cleanWs()
             }
         }
