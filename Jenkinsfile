@@ -38,7 +38,13 @@ pipeline {
                 cleanWs()
             }
         }
-
+	stage ('UAT'){
+	    steps{
+		echo 'Starting UAT Selenium script execution...'
+	    	build job: '/finalProject-UAT'
+	    }	
+	  
+	}
     }
 }
     
