@@ -5,8 +5,8 @@ pipeline {
 	stage('Clean up') {
             steps {
                 echo 'Clean up being done....'
-                sh 'docker stop $(docker ps -a -q)'
-                sh 'docker rm $(docker ps -a -q)'
+                sh 'docker ps -f name=zookeeper -q | xargs --no-run-if-empty docker container stop'
+		sh 'docker container ls -a -fname=zookeeper -q | xargs -r docker container rm'
                 cleanWs()
             }
         }
