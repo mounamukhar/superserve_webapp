@@ -22,9 +22,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-		sh 'docker rmi $registry:$BUILD_NUMBER'
-		sh 'docker build -t $registry:$BUILD_NUMBER .'
-		sh 'docker run -d -p 5000:8888 $registry:$BUILD_NUMBER'
+		sh 'docker build -t mounamukhar/edureka-mouna:$BUILD_NUMBER .'
+		sh 'docker run -d -p 5000:8888 mounamukhar/edureka-mouna:$BUILD_NUMBER'
 	    }
         }
 	stage('Test Deployment') {	   
@@ -47,8 +46,8 @@ pipeline {
         script {
 		
           docker.withRegistry( '', registryCredential ) {
-		  dockerImage = registry + ":$BUILD_NUMBER"
-            dockerImage.push()
+		dockerImage = "mounamukhar/edureka-mouna" + ":$BUILD_NUMBER"
+            	dockerImage.push()
           }
         }
       }
@@ -56,6 +55,7 @@ pipeline {
         stage('Clean up') {
             steps {
                 echo 'Clean up being done....'
+		sh 'docker rmi mounamukhar/edureka-mouna:$BUILD_NUMBER'
                 cleanWs()
             }
         }
