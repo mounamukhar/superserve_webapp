@@ -29,12 +29,6 @@ pipeline {
                echo 'Deployment successful!'
            }
 	}
-	stage('Clean up') {
-            steps {
-                echo 'Clean up being done....'
-                cleanWs()
-            }
-        }
 	stage ('UAT'){
 	    steps {
 		echo 'Starting UAT Selenium script execution...'
@@ -45,12 +39,18 @@ pipeline {
 	stage ('Push to Hub'){
 	    steps {
 		echo 'Pushing image to dockerhub...'
-   		docker.withRegistry('https://registry.hub.docker.com', ‘docker’-hub) {
-             def customImage = docker.build(“edureka-devop-finalproject-${env.BUILD_ID}")
+   		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+             def customImage = docker.build("edureka-devop-finalproject-${env.BUILD_ID}")
              customImage.push(“latest”)
 }
 	    } 
 	}
+        stage('Clean up') {
+            steps {
+                echo 'Clean up being done....'
+                cleanWs()
+            }
+        }
     }
 }
     
