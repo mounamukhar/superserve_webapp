@@ -46,8 +46,7 @@ pipeline {
         script {
 		
           docker.withRegistry( '', registryCredential ) {
-		dockerImage = "mounamukhar/edureka-mouna" + ":$BUILD_NUMBER"
-            	dockerImage.push()
+		  sh 'docker push mounamukhar/edureka-mouna:$BUILD_NUMBER'
           }
         }
       }
