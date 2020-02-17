@@ -31,7 +31,6 @@ pipeline {
         }
 	stage('Test Deployment') {	   
 	   when {
-	   sleep 15
            expression { sh script: '''if [ netstat -an | grep 5000 ]; then true; else false; fi''', returnStatus: true }
            }
            steps {
