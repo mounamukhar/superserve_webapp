@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+    	registry = “mounamukhar/edureka-mouna
+    	registryCredential = 'docker-hub'
+    	dockerImage = ''
+    } 
     agent any
 
     stages {
@@ -17,9 +22,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-		sh 'docker build -t edureka-devop-finalproject-$BUILD_NUMBER .'
-		sh 'docker run -d -p 5000:8888 edureka-devop-finalproject-$BUILD_NUMBER'
-            }
+		sh 'docker build -t registry:$BUILD_NUMBER .'
+		sh 'docker run -d -p 5000:8888 registry:$BUILD_NUMBER'
+                dockerImage=registry:$BUILD_NUMBER
+	    }
         }
 	stage('Test Deployment') {	   
 	   when {
@@ -36,15 +42,15 @@ pipeline {
 	    }	
 	  
 	}
-	stage ('Push to Hub'){
-	    steps {
-		echo 'Pushing image to dockerhub...'
-   		docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-             def customImage = docker.build("edureka-devop-finalproject-${env.BUILD_ID}")
-             customImage.push(“latest”)
-}
-	    } 
-	}
+	stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
         stage('Clean up') {
             steps {
                 echo 'Clean up being done....'
