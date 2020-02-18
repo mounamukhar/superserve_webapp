@@ -22,6 +22,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+		sh 'docker stop $(docker ps -q)'
+		sh 'docker rm $(docker ps -a -q)'    
 		sh 'docker build -t mounamukhar/edureka-mouna:$BUILD_NUMBER .'
 		sh 'docker run -d -p 5000:8888 mounamukhar/edureka-mouna:$BUILD_NUMBER'
 	    }
