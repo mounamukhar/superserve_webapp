@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-		sh 'docker system prune -af --volumes'  
+		sh 'docker system prune -af --volumes'
 		sh 'docker build -t mounamukhar/edureka-mouna:$BUILD_NUMBER .'
 		sh 'docker run -d -p 5000:8888 mounamukhar/edureka-mouna:$BUILD_NUMBER'
 	    }
@@ -54,8 +54,7 @@ pipeline {
     }
         stage('Clean up') {
             steps {
-                echo 'Clean up being done....'
-		sh 'docker stop $(docker ps -q --filter ancestor=mounamukhar/edureka-mouna:$BUILD_NUMBER )'  
+                echo 'Clean up being done....' 
                 cleanWs()
             }
         }
