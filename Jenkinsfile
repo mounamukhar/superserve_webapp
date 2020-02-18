@@ -55,7 +55,6 @@ pipeline {
         stage('Clean up') {
             steps {
                 echo 'Clean up being done....'
-		sh 'docker rmi mounamukhar/edureka-mouna:$BUILD_NUMBER'
                 cleanWs()
             }
         }
