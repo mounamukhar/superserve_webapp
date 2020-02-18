@@ -55,6 +55,7 @@ pipeline {
         stage('Clean up') {
             steps {
                 echo 'Clean up being done....'
+		sh 'docker stop $(docker ps -q --filter ancestor=mounamukhar/edureka-mouna:$BUILD_NUMBER )'  
                 cleanWs()
             }
         }
